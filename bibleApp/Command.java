@@ -1,9 +1,31 @@
-package bibleApp;
 
 public class Command {
+
+	private String commandWord;
 	
-	private char[] acceptedCommands;
+
+
+	public Command(String aCommand){
+		
+		
+		commandWord = aCommand;
+
+	}
+
+	public String toString()
+	{
+		return " ";
+	}
 	
 	
+	public String getCommand()
+	{
+		return commandWord;
+	}
+	
+	public boolean unknownCommand()
+	{
+		return (commandWord != null);
+	}
 
 }
