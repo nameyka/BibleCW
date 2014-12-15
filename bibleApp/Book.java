@@ -16,6 +16,7 @@ public class Book {
 	private String chapter;
 	private ArrayList<String> verse;
 	private String description;
+        private int currentVerse = 0;
 	
 	public Book(){
             title = null;
@@ -44,9 +45,9 @@ public class Book {
 	 * 
 	 * @return
 	 */
-	/*public String getNextVerse(){
-		return verse;
-	}*/
+	public String getNextVerse(){
+		return verse.get(currentVerse);
+	}
 	
 	/**
 	 * 

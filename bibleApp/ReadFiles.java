@@ -52,7 +52,7 @@ public class ReadFiles{
 		String currentLine ="";
 		ArrayList<String> textHolder = new ArrayList<String>();
 		File textFile = new File(folder.getAbsolutePath() + File.separator + fileName);
-		System.out.println(folder.getAbsolutePath() + File.separator + fileName);
+		//System.out.println(folder.getAbsolutePath() + File.separator + fileName);
 		BufferedReader br = new BufferedReader(new FileReader(textFile));
 			
 		try{
