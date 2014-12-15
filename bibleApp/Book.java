@@ -1,4 +1,8 @@
 package bibleApp;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * 
  * @author Faye Cutler, Hayley Billingham and Nameyka Myrie.
@@ -10,14 +14,15 @@ public class Book {
 	
 	private String title;
 	private String chapter;
-	private String verse;
+	private ArrayList<String> verse;
 	private String description;
 	
-	/**
-
-	public String search(){
-		
-	} */
+	public Book(){
+            title = null;
+            chapter = null;
+            verse = new ArrayList<String>();
+            description = null;
+        }
 	
 	/**
 	 * 
@@ -31,17 +36,17 @@ public class Book {
 	 * 
 	 * @return
 	 */
-	public String getChapter(){
-		return chapter;
+	public ArrayList<String> getChapter(){
+		return verse;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public String getNextVerse(){
+	/*public String getNextVerse(){
 		return verse;
-	}
+	}*/
 	
 	/**
 	 * 
@@ -66,7 +71,34 @@ public class Book {
 	public String getDescription(){
 		return description;
 	}
+        
+        public void setTitle(String t){
+            title = t;
+        }
+        
+        public void setDesc(String d){
+            description = d;
+        }
+        
+        public void addVerse(String v){
+            verse.add(v);
+        }
 	
+        public static Book setBook(ArrayList<String> arr){
+            Book b = new Book();
+            for (String line : arr) {
+                if(line.length() > 0){
+                    if(b.getTitle() == null){
+                        b.setTitle(line);
+                    } else {
+                        b.addVerse(line);
+                    }
+                }
+            }
+            return b;
+        }
+            
+        
 	/**
 	 * 
 	 */
