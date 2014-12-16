@@ -26,7 +26,7 @@ public class ReadFilesTest {
         System.out.println("getFilesByName");
         ReadFiles instance = new ReadFiles();
         int expResultLength = 66;
-        File[] result = instance.getFilesByName();
+        File[] result = instance.getFiles();
         assertEquals(expResultLength, result.length);
     }
     /**

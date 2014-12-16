@@ -36,7 +36,7 @@ public class ReadFiles{
 	 * 
 	 * @return File[]
 	 */
-	public File[] getFilesByName(){
+	public File[] getFiles(){
 		fileList = folder.listFiles();
 		return fileList;
 	}
@@ -59,7 +59,7 @@ public class ReadFiles{
 		String currentLine ="";
 		ArrayList<String> textHolder = new ArrayList<String>();
 		File textFile = new File(folder.getAbsolutePath() + File.separator + fileName);
-//		System.out.println(folder.getAbsolutePath() + File.separator + files);
+		//System.out.println(folder.getAbsolutePath() + File.separator + fileName);
 		BufferedReader br = new BufferedReader(new FileReader(textFile));
 			
 		try{
@@ -85,7 +85,10 @@ public class ReadFiles{
 		
 		return textHolder;
 	}
-
+    /*public static void main(String[] args) throws FileNotFoundException {
+        ReadFiles rf = new ReadFiles();
+        System.out.println(rf.getFile("1John.txt").get(0));
+    }*/
 
 }
 

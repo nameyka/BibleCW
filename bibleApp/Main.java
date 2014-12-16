@@ -1,96 +1,134 @@
 package bibleApp;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import collections.Collection;
-
-
-public class Main {
-	//private Collection[] books;
-	//private Command commands;
-
-	/*public static void main(String args[]) {
-
-		try {
-			Runtime rt = Runtime.getRuntime();
-			Process pr = rt.exec("cmd /c dir");
-			//Process pr = rt.exec("F:\\helloworld.exe");
-			
-
-			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-
-			String line=null;
-
-			while((line=input.readLine()) != null) {
-				System.out.println(line);
-			}
-
-			int exitVal = pr.waitFor();
-			System.out.println("Exited with error code "+exitVal);
-
-		} catch(Exception e) {
-			System.out.println(e.toString());
-			e.printStackTrace();
+public class Main{
+    
+    ArrayList<Book> Books;
+    ReadFiles rf;
+    Scanner scan;
+    
+    public Main() throws FileNotFoundException{
+        rf = new ReadFiles();
+        Books = new ArrayList<Book>();
+        File[] f = rf.getFiles();
+        for(File file: f){
+            Books.add(Book.setBook(rf.getFile(file.getName())));
+        }
+        displayWelcomeMenu();
+        char choice;
+        
+        //System.out.println(Books.size());
+        while(true){
+            scan = new Scanner(System.in);
+            choice = scan.next().charAt(0);
+            option(choice);
+            System.out.println("Choose an option or M to display the menu");
+        }
+        
+    }
+    
+    private void listBooks(){
+        for(int i = 0; i < Books.size(); i++){
+            System.out.println((i+1)+": " + Books.get(i).getTitle());
+        }
+    }
+    
+    private String choseReadBook(int c){
+        Book b = Books.get(c-1);
+        System.out.println(b.getNextVerse());
+        System.out.println("N for next or chose an option");
+        char opt = scan.next().charAt(0);
+        while(opt == 'N' || opt == 'n'){
+            System.out.println(b.getNextVerse());
+            System.out.println("N for next or chose an option");
+            opt = scan.next().charAt(0);
+        } 
+        option(opt);
+        return "";
+    }
+    
+    private void option(char command){
+	//System.out.println("THIS WORKS" + command);
+        //System.out.print("Enter option: ");
+        switch(command){
+                
+            case 'R':
+            case 'r':
+                System.out.println("You choose R");
+		//bookStart();
+                break;
+                        
+                case 'B':
+                case 'b':
+                    System.out.println("You choose B");
+                    listBooks();
+                    int book = scan.nextInt();
+                    choseReadBook(book);
+                    break;
+                    
+                case 'S':
+                case 's':
+                    System.out.println("You choose S");
+                    //searchBible();
+                    break;
+                    
+                case 'Q':
+                case 'q':
+                    System.out.println("Goodbye");
+                    System.exit(0);
+                    break;
+                
+                case 'M':
+                case 'm':
+                    displayMenu();
+                       
+                default:
+                    System.out.println("Your choice was not recognised");
+                    //recursion here
+                    break;
 		}
-	}
-        private void printWelcome()
-	{
+    }
+
+    private void displayWelcomeMenu(){
 		System.out.println();
-		System.out.println("Welcome to the BibleApp");
+		System.out.println("                       Welcome to the BibleApp");
 		System.out.println("The BibleApp allows you search through the bible, allowing you to read through verses");
-		System.out.println("Type 'help' if you need help.");
+		System.out.println("                     Type 'h' if you need help.");
 		System.out.println();
-		// now need to print the description of the player's location
-		// System.out.println(currentRoom.getLongDescription());
-		System.out.println(player.getLocation().getLongDescription());
+		System.out.println("	 	     ...........     ............ ");
+		System.out.println("                ,..,\'           \',.,\'            \',..,");
+		System.out.println("              ,' ,'               :                ', ',)");
+		System.out.println("            ,' ,'                 :                  ', ',");
+		System.out.println("          ,' ,'                   :                    ', ',");
+		System.out.println("        ,' ,'                     :                      ', ',");
+		System.out.println("      ,' ,'                       :                        ', ',");
+		System.out.println("    ,' ,'.......................  :  ........................', ',");
+		System.out.println("  ,' ,'                         ',:,'                          ', ',");
+		System.out.println(",'  '........................     '     .........................'  ',");
+		System.out.println("''''''''''''''''''''''''''''';''''''';''''''''''''''''''''''''''''''");
+		System.out.println("   							  '''''''								");
+		System.out.println("                           Bible Works                  ");
+		displayMenu();
 	}
-	private boolean processCommand(Command command) 
-	{
-		boolean wantToQuit = false;
-
-		if(command.isUnknown()) {
-			System.out.println("Command is not reconised, please insert another command");
-			return false;
-		}
-
-		String commandWord = command.getCommandWord();
-		if (commandWord.equals("help")) {
-			printHelp();
-		}
-		else if (commandWord.equals("go")) {
-			goRoom(command);
-		}
-		else if (commandWord.equals("quit")) {
-			wantToQuit = quit(command);
-		}
-		// else command not recognised.
-		return wantToQuit;
-	}
-	private void printHelp() 
-	{
-		System.out.println("You are lost. You are alone. You wander");
-		System.out.println("around at the university.");
+    
+    private void displayMenu(){
+        	System.out.println("               =========================================");
+		System.out.println("               |Read from beginning.................[R]|");
+		System.out.println("               |Select from List of Books...........[B]|");
+		System.out.println("               |Search Keyword......................[K]|");
+		System.out.println("               |Quit Bible Works....................[Q]|");
+		System.out.println("               =========================================");
 		System.out.println();
-		System.out.println("Your command words are:");
-		parser.showCommands();
-	}
 
-	private boolean quit(Command command) 
-	{
-		if(command.hasSecondWord()) {
-			System.out.println("Quit what?");
-			return false;
-		}
-		else {
-			return true;  // signal that we want to quit
-		}
-	}*/
+		System.out.println("                       PLEASE enter a menu option:");
+    }
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        new Main();
+    }
 
 }
-
-        
-
-
