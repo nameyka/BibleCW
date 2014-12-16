@@ -1,5 +1,5 @@
 
-public class Command {
+/*public class Command {
 
 	private String commandWord;
 	
@@ -28,4 +28,4 @@ public class Command {
 		return (commandWord != null);
 	}
 
-}
+}*/

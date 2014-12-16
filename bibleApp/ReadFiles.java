@@ -15,23 +15,28 @@ import java.util.ArrayList;
  *
  */
 
+
 public class ReadFiles{
 	private File[] fileList;
 	private File folder;
-	private String path = "C:\\KJBible";
+	private String path = "build\\classes\\KJBible";
+        private int c = 0;
 
-	public ReadFiles()
-	{
+	public ReadFiles(){
 		folder = new File(path);
 	}
 	
+        /*public ReadFiles ReadFiles(String path){
+            folder = new File(path);
+            return this;
+        }*/
+        
 	/**
 	 * Get the name of each file
 	 * 
 	 * @return File[]
 	 */
-	public File[] getFiles()
-	{
+	public File[] getFilesByName(){
 		fileList = folder.listFiles();
 		return fileList;
 	}
@@ -50,7 +55,7 @@ public class ReadFiles{
 	 * 
 	 */
 	
-	public ArrayList<String> getFile(String fileName) throws FileNotFoundException{
+	public ArrayList<String> getFile(String fileName) throws FileNotFoundException, IOException{
 		String currentLine ="";
 		ArrayList<String> textHolder = new ArrayList<String>();
 		File textFile = new File(folder.getAbsolutePath() + File.separator + fileName);
@@ -68,6 +73,7 @@ public class ReadFiles{
 				}*/
 				//	log(line);
 				textHolder.add(currentLine);
+                                //System.out.println(currentLine + ": "+ c++);
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -79,7 +85,7 @@ public class ReadFiles{
 		
 		return textHolder;
 	}
-	
+
 
 }
 

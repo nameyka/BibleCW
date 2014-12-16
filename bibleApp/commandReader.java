@@ -13,7 +13,7 @@ public class commandReader {
 		commands = new CommandActions();
 	}
 
-	public Command getCommandIn()
+	/*public Command getCommandIn()
 	{
 		String input;
 		String comWord = null;
@@ -32,6 +32,6 @@ public class commandReader {
 		{
 			commands.showAll();
 		}
-	}
+	}*/
 
 }

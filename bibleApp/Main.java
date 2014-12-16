@@ -12,7 +12,7 @@ public class Main {
 	//private Collection[] books;
 	//private Command commands;
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 
 		try {
 			Runtime rt = Runtime.getRuntime();
@@ -87,10 +87,10 @@ public class Main {
 		else {
 			return true;  // signal that we want to quit
 		}
-	}
+	}*/
 
 }
 
         
-}
+
 
