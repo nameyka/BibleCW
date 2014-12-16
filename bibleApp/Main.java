@@ -6,12 +6,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Gather data from external sources
+ * Execute main program
+ *
+ * @author 3Dots
+ */
 public class Main{
     
     ArrayList<Book> Books;
     ReadFiles rf;
     Scanner scan;
     
+    /**
+     * Initialise fields and base program
+     * 
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public Main() throws FileNotFoundException, IOException{
         rf = new ReadFiles();
         Books = new ArrayList<Book>();
@@ -38,22 +50,34 @@ public class Main{
         
     }
     
+    
+    /**
+     * List the name of each off in the Books field
+     */
     private void listBooks(){
         for(int i = 0; i < Books.size(); i++){
             System.out.println((i+1)+": " + Books.get(i).getName());
         }
     }
-    
+    /**
+     * Search through Books for the keyword
+     * Display occurrences of the word fond in each book 
+     * 
+     * @param keyword word to search for
+     */
     private void searchBooks(String keyword){
         int count;
         for(Book b: Books){
             count = b.search(keyword);
             if(count > 0){
-                System.out.println(count + " occurances in: " + b.getTitle());
+                System.out.println(count + " occurrences in: " + b.getTitle());
             }
         }
     }
     
+    /**
+     * Shows the content of he collection of books from the beginning
+     */
     private void readFromStart(){
         int currentPos = 0;
         
@@ -64,6 +88,13 @@ public class Main{
         }
     }
     
+    /**
+     * Find and show the content of a book
+     * 
+     * @param c the position of the Book in the collection
+     * 
+     * @return true if book found
+     */
     private boolean choseReadBook(int c){
         Book b = Books.get(c-1);
         System.out.println("Book: " + b.getTitle());
@@ -89,10 +120,16 @@ public class Main{
             option(opt);
             return false;
         }
+        
         //never gonna get here
         return true;
     }
     
+    /**
+     * Viewing parts of book depending on input
+     * 
+     * @param pos Sting representation of book position
+     */
     private void view(String pos){
         boolean wrongFormat = false;
         String[] spil = pos.split(" ");
@@ -122,7 +159,7 @@ public class Main{
             } else wrongFormat = true;
         } else wrongFormat = true;
         
-        //if(wrongFormat) System.out.println("Information in the wrong format");
+        if(wrongFormat) System.out.println("Information in the wrong format");
         
         for(Book b: Books){
             String view = b.show(bookName, chapter, v1, v2);
@@ -132,18 +169,20 @@ public class Main{
             }
         }
         
-        //Get chapter
     }
-    
+    /**
+     * Menu option list: On request, executes methods associated
+     * with the menu
+     * 
+     * @param command input from user
+     */
     private void option(char command){
-	//System.out.println("THIS WORKS" + command);
-        //System.out.print("Enter option: ");
         switch(command){
                 
-            case 'R':
-            case 'r':
-		readFromStart();
-                break;
+                case 'R':
+                case 'r':
+                    readFromStart();
+                    break;
                         
                 case 'B':
                 case 'b':
@@ -187,6 +226,9 @@ public class Main{
 		}
     }
 
+    /**
+     * Displays welcome message
+     */
     private void displayWelcomeMenu(){
 		System.out.println();
 		System.out.println("                       Welcome to the BibleApp");
@@ -208,7 +250,9 @@ public class Main{
 		System.out.println("                           Bible Works                  ");
 		displayMenu();
 	}
-    
+    /**
+     * Display main menu
+     */
     private void displayMenu(){
         	System.out.println("\t\t=========================================");
 		System.out.println("\t\t|Read from beginning.................[R]|");
@@ -222,6 +266,13 @@ public class Main{
 		System.out.print("\t\t\tPLEASE enter a menu option: ");
     }
     
+    /**
+     * Main method
+     * 
+     * @param args
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         new Main();
     }
