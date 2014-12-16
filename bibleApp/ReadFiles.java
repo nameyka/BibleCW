@@ -6,11 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.StringTokenizer;
-//something
+
 /**
+ * Read files from external sources
  * 
- * @author Hayley
+ * @author 3Dots
  * 
  *
  */
@@ -26,10 +26,6 @@ public class ReadFiles{
 		folder = new File(path);
 	}
 	
-        /*public ReadFiles ReadFiles(String path){
-            folder = new File(path);
-            return this;
-        }*/
         
 	/**
 	 * Get the name of each file
@@ -65,15 +61,7 @@ public class ReadFiles{
 		try{
 			while((currentLine = br.readLine()) != null){
 
-				//StringTokenizer parser = new StringTokenizer(currentLine); 
-				/*StringTokenizer parser = new StringTokenizer(currentLine, " \t\n\r\f.,;:!?'");
-
-				while (parser.hasMoreTokens()){
-					String currentWord = parser.nextToken(); 
-				}*/
-				//	log(line);
 				textHolder.add(currentLine);
-                                //System.out.println(currentLine + ": "+ c++);
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -85,11 +73,6 @@ public class ReadFiles{
 		
 		return textHolder;
 	}
-    /*public static void main(String[] args) throws FileNotFoundException {
-        ReadFiles rf = new ReadFiles();
-        System.out.println(rf.getFile("1John.txt").get(0));
-    }*/
-
 }
 
 
