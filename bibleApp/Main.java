@@ -119,8 +119,8 @@ public class Main{
                     v1 = Integer.parseInt(spil[0]);
                     v2 = Integer.parseInt(spil[0]);
                 }
-            } else System.out.println("Information in the wrong format1");//wrongFormat = true;
-        } else System.out.println("Information in the wrong format2");//wrongFormat = true;
+            } else wrongFormat = true;
+        } else wrongFormat = true;
         
         //if(wrongFormat) System.out.println("Information in the wrong format");
         

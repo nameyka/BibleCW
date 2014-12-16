@@ -77,27 +77,30 @@ public class Book {
         public String show(String bookName, int chapter, int v1, int v2){
             int c = getChapterPos(chapter);
             String show = "";
-            System.out.println("b Bookname");
+            System.out.println(bookName + ":"+name);
             if(name.equalsIgnoreCase(bookName)){
-                System.out.println("Bookname");
-                if(c > -1){
-                    System.out.println("No c");
+                if(c < 0){
                     return null;
                 } else {
-                    System.out.println("C");
-                    currentVerse = c;
-                    if(v1 > v2){
-                        while(v1 > v2){
-                            show += getNextVerse();
-                            v1--;
-                        }
-                    } else {
-                        v1--;
-                        while(v1 < v2){
-                            show += getNextVerse();
+                    if(v1 == 0 && v2 == 0){
+                        v1 = c;
+                        v2 = getChapterPos(chapter++);
+                    } 
+                        currentVerse = c;
+                        if(v1 > v2){
                             v1++;
+                            while(v1 > v2){
+                                show += getNextVerse()+"\n";
+                                v1--;
+                            }
+                        } else {
+                            v1--;
+                            while(v1 < v2){
+                                show += getNextVerse()+"\n";
+                                v1++;
+                            }
                         }
-                    }
+                    
                 }
             } else return null;
             return show;
@@ -140,6 +143,7 @@ public class Book {
         }
 	
         public int getChapterPos(int chapter){
+            
             for(int i = 0; i < verse.size(); i++){
                 if(verse.get(i).equalsIgnoreCase("CHAPTER "+chapter)){
                     return i;
