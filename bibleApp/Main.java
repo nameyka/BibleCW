@@ -16,8 +16,13 @@ public class Main{
         rf = new ReadFiles();
         Books = new ArrayList<Book>();
         File[] f = rf.getFiles();
+        int count = 0;
         for(File file: f){
             Books.add(Book.setBook(rf.getFile(file.getName())));
+            String name = file.getName().substring(0, file.getName().length()-4);
+            System.out.println(name);
+            Books.get(count).setName(name);
+            count++;
         }
         displayWelcomeMenu();
         char choice;
@@ -35,7 +40,7 @@ public class Main{
     
     private void listBooks(){
         for(int i = 0; i < Books.size(); i++){
-            System.out.println((i+1)+": " + Books.get(i).getTitle());
+            System.out.println((i+1)+": " + Books.get(i).getName());
         }
     }
     
@@ -88,6 +93,48 @@ public class Main{
         return true;
     }
     
+    private void view(String pos){
+        boolean wrongFormat = false;
+        String[] spil = pos.split(" ");
+        String bookName = "";
+        int chapter = 0, v1 = 0, v2 = 0;
+        //Get book name
+        System.out.println(spil.length+ pos);
+        if(spil.length == 2){
+            bookName = spil[0];
+            
+            spil = spil[1].split(":");
+            
+            //Get chapter
+            if(spil.length == 2){
+                chapter = Integer.parseInt(spil[0]);
+                
+                spil = spil[1].split("-");
+                    
+                //get verses
+                if(spil.length == 2){
+                    v1 = Integer.parseInt(spil[0]);
+                    v2 = Integer.parseInt(spil[1]);
+                } else if(spil.length == 1){
+                    v1 = Integer.parseInt(spil[0]);
+                    v2 = Integer.parseInt(spil[0]);
+                }
+            } else System.out.println("Information in the wrong format1");//wrongFormat = true;
+        } else System.out.println("Information in the wrong format2");//wrongFormat = true;
+        
+        //if(wrongFormat) System.out.println("Information in the wrong format");
+        
+        for(Book b: Books){
+            String view = b.show(bookName, chapter, v1, v2);
+            if(view != null){
+                System.out.println(view);
+                break;
+            }
+        }
+        
+        //Get chapter
+    }
+    
     private void option(char command){
 	//System.out.println("THIS WORKS" + command);
         //System.out.print("Enter option: ");
@@ -123,6 +170,15 @@ public class Main{
                 case 'm':
                     displayMenu();
                     break;
+                
+                case 'P':
+                case 'p':
+                    System.out.println("Enter goto position");
+                    System.out.println("Format: book name chapter:end verse-end verse");
+                    System.out.println("Example: [James 3:5-7]");
+                    String place = scan.next() + " " + scan.next();
+                    view(place);
+                    break;
                        
                 default:
                     System.out.println("Your choice was not recognised");
@@ -154,15 +210,16 @@ public class Main{
 	}
     
     private void displayMenu(){
-        	System.out.println("               =========================================");
-		System.out.println("               |Read from beginning.................[R]|");
-		System.out.println("               |Select from List of Books...........[B]|");
-		System.out.println("               |Search Keyword......................[S]|");
-		System.out.println("               |Quit Bible Works....................[Q]|");
-		System.out.println("               =========================================");
+        	System.out.println("\t\t=========================================");
+		System.out.println("\t\t|Read from beginning.................[R]|");
+		System.out.println("\t\t|Select from List of Books...........[B]|");
+		System.out.println("\t\t|Search Keyword......................[S]|");
+                System.out.println("\t\t|Go to position......................[P]|");
+		System.out.println("\t\t|Quit Bible Works....................[Q]|");
+		System.out.println("\t\t=========================================");
 		System.out.println();
 
-		System.out.print("                       PLEASE enter a menu option: ");
+		System.out.print("\t\t\tPLEASE enter a menu option: ");
     }
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
