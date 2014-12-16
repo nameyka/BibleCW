@@ -24,6 +24,27 @@ public class Book {
             verse = new ArrayList<String>();
             description = null;
         }
+        
+        public int search(String word){
+            int amount = 0;
+            String[] arr;
+            //Has to be a word
+            if(title != null){
+                arr = title.split(" ");
+                for(int i = 0; i < arr.length; i++){
+                    if(arr[i].toLowerCase().equalsIgnoreCase(word)) amount++;
+                }
+            }
+            
+            for(String s: verse){
+            
+                arr = s.split(" ");
+                for(int i = 0; i < arr.length; i++){
+                    if(arr[i].toLowerCase().equalsIgnoreCase(word)) amount++;
+                }
+            }
+            return amount;
+        }
 	
 	/**
 	 * 
@@ -46,7 +67,10 @@ public class Book {
 	 * @return
 	 */
 	public String getNextVerse(){
-		return verse.get(currentVerse);
+            if(currentVerse == verse.size()){
+                return null;
+            }
+		return verse.get(currentVerse++);
 	}
 	
 	/**
@@ -54,15 +78,7 @@ public class Book {
 	 * @return
 	 */
 	public boolean hasDescription(){
-		if (description.equalsIgnoreCase("true") || description.equalsIgnoreCase("false")) {
-		    Boolean.valueOf(description); {
-		    	return true;
-		    }
-		    // do something   
-		} else {
-		    // throw some exception
-			return false;
-		}
+            return (description != null);
 	}
 	
 	/**
