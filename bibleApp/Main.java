@@ -32,7 +32,6 @@ public class Main{
         for(File file: f){
             Books.add(Book.setBook(rf.getFile(file.getName())));
             String name = file.getName().substring(0, file.getName().length()-4);
-            System.out.println(name);
             Books.get(count).setName(name);
             count++;
         }
