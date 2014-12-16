@@ -15,7 +15,6 @@ import java.util.ArrayList;
  *
  */
 
-
 public class ReadFiles{
 	private File[] fileList;
 	private File folder;
